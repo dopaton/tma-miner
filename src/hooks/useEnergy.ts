@@ -7,7 +7,7 @@ export const useEnergy = (user: User | null, setUser: (user: User) => void) => {
   // Use useMemo for derived state instead of useEffect
   const energyPercentage = useMemo(() => {
     return user ? (user.energy / user.maxEnergy) * 100 : 100;
-  }, [user?.energy, user?.maxEnergy]);
+  }, [user]);
 
   const consumeEnergy = useCallback((amount: number = ENERGY_COST_PER_CLAIM): boolean => {
     if (!user || user.energy < amount) {

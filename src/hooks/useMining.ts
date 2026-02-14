@@ -4,8 +4,20 @@ import { storageService, miningService } from '../services';
 import { ENERGY_REGEN_RATE } from '../models/constants';
 
 export const useMining = (user: User | null, setUser: (user: User) => void) => {
-  const [offlineEarnings, setOfflineEarnings] = useState<number>(0);
-  const [isInitialized, setIsInitialized] = useState(false);
+  // Calculate initial offline earnings once using useMemo
+  const initialOfflineEarnings = useMemo(() => {
+    if (!user) return 0;
+    const currentTime = Date.now();
+    return miningService.calculateOfflineEarnings(
+      user.equipment,
+      user.referrals.length,
+      user.lastMiningTime,
+      currentTime
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const [offlineEarnings, setOfflineEarnings] = useState<number>(initialOfflineEarnings);
 
   // Calculate mining rate using useMemo instead of useEffect
   const miningRate = useMemo(() => {
@@ -16,24 +28,6 @@ export const useMining = (user: User | null, setUser: (user: User) => void) => {
     );
     return rate.total;
   }, [user]);
-
-  // Initialize and calculate offline earnings once
-  useEffect(() => {
-    if (user && !isInitialized) {
-      const currentTime = Date.now();
-      const earnings = miningService.calculateOfflineEarnings(
-        user.equipment,
-        user.referrals.length,
-        user.lastMiningTime,
-        currentTime
-      );
-      
-      if (earnings > 0) {
-        setOfflineEarnings(earnings);
-      }
-      setIsInitialized(true);
-    }
-  }, [user, isInitialized]);
 
   // Auto-mining ticker (updates every second)
   useEffect(() => {

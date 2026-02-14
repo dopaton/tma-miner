@@ -1,0 +1,110 @@
+.leaderboard {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.leaderboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.leaderboard-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--tg-theme-text-color, #000);
+}
+
+.user-rank {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: var(--tg-theme-button-color, #007bff);
+  color: var(--tg-theme-button-text-color, #fff);
+  border-radius: 20px;
+}
+
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.leaderboard-entry {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: var(--tg-theme-bg-color, #fff);
+  border-radius: 12px;
+  border: 1px solid var(--tg-theme-secondary-bg-color, #f0f0f0);
+  transition: all 0.2s;
+}
+
+.leaderboard-entry.current-user {
+  background: var(--tg-theme-button-color, #007bff);
+  color: var(--tg-theme-button-text-color, #fff);
+  border-color: var(--tg-theme-button-color, #007bff);
+}
+
+.entry-rank {
+  font-size: 24px;
+  font-weight: bold;
+  min-width: 50px;
+  text-align: center;
+}
+
+.current-user .entry-rank {
+  color: var(--tg-theme-button-text-color, #fff);
+}
+
+.entry-info {
+  flex: 1;
+}
+
+.entry-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--tg-theme-text-color, #000);
+  margin-bottom: 4px;
+}
+
+.current-user .entry-name {
+  color: var(--tg-theme-button-text-color, #fff);
+}
+
+.entry-mined {
+  font-size: 14px;
+  color: var(--tg-theme-hint-color, #999);
+  display: flex;
+  align-items: center;
+}
+
+.current-user .entry-mined {
+  color: var(--tg-theme-button-text-color, #fff);
+  opacity: 0.9;
+}
+
+.coin-icon-small {
+  margin-right: 4px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--tg-theme-hint-color, #999);
+}
+
+.empty-icon {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}

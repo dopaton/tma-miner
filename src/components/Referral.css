@@ -1,0 +1,208 @@
+.referral {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.referral-header {
+  margin-bottom: 20px;
+}
+
+.referral-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--tg-theme-text-color, #000);
+}
+
+.referral-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background: var(--tg-theme-bg-color, #fff);
+  border-radius: 12px;
+  border: 1px solid var(--tg-theme-secondary-bg-color, #f0f0f0);
+}
+
+.stat-icon {
+  font-size: 32px;
+  min-width: 36px;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--tg-theme-hint-color, #999);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--tg-theme-text-color, #000);
+  display: flex;
+  align-items: center;
+}
+
+.coin-icon-small {
+  font-size: 16px;
+  margin-right: 4px;
+}
+
+.referral-benefits {
+  background: var(--tg-theme-bg-color, #fff);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+  border: 1px solid var(--tg-theme-secondary-bg-color, #f0f0f0);
+}
+
+.referral-benefits h3 {
+  margin: 0 0 15px 0;
+  font-size: 18px;
+  color: var(--tg-theme-text-color, #000);
+}
+
+.benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: var(--tg-theme-secondary-bg-color, #f0f0f0);
+  border-radius: 10px;
+}
+
+.benefit-icon {
+  font-size: 24px;
+  min-width: 32px;
+}
+
+.benefit-item p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--tg-theme-text-color, #000);
+  line-height: 1.4;
+}
+
+.referral-link-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+  color: white;
+}
+
+.referral-link-section h3 {
+  margin: 0 0 15px 0;
+  font-size: 18px;
+}
+
+.link-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.link-input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.link-input::selection {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.copy-button {
+  padding: 12px 20px;
+  background: white;
+  color: #667eea;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s;
+}
+
+.copy-button:active {
+  transform: scale(0.98);
+}
+
+.link-description {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.referral-list {
+  background: var(--tg-theme-bg-color, #fff);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--tg-theme-secondary-bg-color, #f0f0f0);
+}
+
+.referral-list h3 {
+  margin: 0 0 15px 0;
+  font-size: 18px;
+  color: var(--tg-theme-text-color, #000);
+}
+
+.referral-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.referral-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--tg-theme-secondary-bg-color, #f0f0f0);
+  border-radius: 10px;
+}
+
+.referral-icon {
+  font-size: 24px;
+  min-width: 32px;
+}
+
+.referral-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--tg-theme-text-color, #000);
+}
+
+.referral-badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  background: var(--tg-theme-button-color, #007bff);
+  color: var(--tg-theme-button-text-color, #fff);
+  border-radius: 12px;
+  font-weight: 600;
+}

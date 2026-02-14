@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import type { User, Equipment } from './types';
+import './types/telegram.d.ts';
 import { storageService } from './services';
 import { useMining, useEquipment, useEnergy } from './hooks';
 import MiningFarm from './components/MiningFarm';
@@ -21,7 +22,7 @@ function App() {
   useEffect(() => {
     const initUser = () => {
       // Try to get Telegram WebApp data
-      const tg = (window as any).Telegram?.WebApp;
+      const tg = window.Telegram?.WebApp;
       
       // Use Telegram user ID if available, otherwise use a demo ID
       const userId = tg?.initDataUnsafe?.user?.id?.toString() || 'demo_user';
@@ -34,7 +35,7 @@ function App() {
       if (startParam) {
         try {
           referredBy = atob(startParam);
-        } catch (e) {
+        } catch {
           console.error('Invalid referral code');
         }
       }
@@ -78,7 +79,7 @@ function App() {
 
   // Setup back button
   useEffect(() => {
-    const tg = (window as any).Telegram?.WebApp;
+    const tg = window.Telegram?.WebApp;
     if (!tg) return;
 
     if (currentTab !== 'mine') {
@@ -95,7 +96,7 @@ function App() {
 
   // Setup main button for shop
   useEffect(() => {
-    const tg = (window as any).Telegram?.WebApp;
+    const tg = window.Telegram?.WebApp;
     if (!tg) return;
 
     if (currentTab === 'mine') {
@@ -123,18 +124,18 @@ function App() {
 
   const handleUpgrade = (equipmentType: keyof Equipment) => {
     const success = upgradeEquipment(equipmentType);
-    const tg = (window as any).Telegram?.WebApp;
+    const tg = window.Telegram?.WebApp;
     if (success) {
       // Haptic feedback on successful upgrade
       try {
         tg?.HapticFeedback?.notificationOccurred('success');
-      } catch (e) {
+      } catch {
         console.log('Haptic feedback not available');
       }
     } else {
       try {
         tg?.HapticFeedback?.notificationOccurred('error');
-      } catch (e) {
+      } catch {
         console.log('Haptic feedback not available');
       }
     }
@@ -142,10 +143,10 @@ function App() {
 
   const handleClaimOffline = () => {
     claimOfflineEarnings();
-    const tg = (window as any).Telegram?.WebApp;
+    const tg = window.Telegram?.WebApp;
     try {
       tg?.HapticFeedback?.notificationOccurred('success');
-    } catch (e) {
+    } catch {
       console.log('Haptic feedback not available');
     }
   };

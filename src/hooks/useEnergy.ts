@@ -1,15 +1,12 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import type { User } from '../types';
 import { storageService } from '../services';
 import { ENERGY_COST_PER_CLAIM } from '../models/constants';
 
 export const useEnergy = (user: User | null, setUser: (user: User) => void) => {
-  const [energyPercentage, setEnergyPercentage] = useState(100);
-
-  useEffect(() => {
-    if (user) {
-      setEnergyPercentage((user.energy / user.maxEnergy) * 100);
-    }
+  // Use useMemo for derived state instead of useEffect
+  const energyPercentage = useMemo(() => {
+    return user ? (user.energy / user.maxEnergy) * 100 : 100;
   }, [user?.energy, user?.maxEnergy]);
 
   const consumeEnergy = useCallback((amount: number = ENERGY_COST_PER_CLAIM): boolean => {
@@ -30,7 +27,7 @@ export const useEnergy = (user: User | null, setUser: (user: User) => void) => {
 
   const hasEnoughEnergy = useCallback((amount: number = ENERGY_COST_PER_CLAIM): boolean => {
     return user ? user.energy >= amount : false;
-  }, [user?.energy]);
+  }, [user]);
 
   return {
     energyPercentage,

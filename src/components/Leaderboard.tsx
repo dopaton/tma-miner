@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { storageService } from '../services';
 import type { LeaderboardEntry } from '../types';
 import { formatNumber } from '../utils/helpers';
@@ -10,7 +10,6 @@ interface LeaderboardProps {
 
 const Leaderboard: React.FC<LeaderboardProps> = ({ currentUserId }) => {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
-  const [currentUserRank, setCurrentUserRank] = useState<number | null>(null);
 
   useEffect(() => {
     const leaderboard = storageService.getLeaderboard();
@@ -21,13 +20,15 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ currentUserId }) => {
       rank: index + 1,
     }));
 
-    setEntries(leaderboardEntries);
-
-    const currentUser = leaderboardEntries.find(entry => entry.id === currentUserId);
-    if (currentUser) {
-      setCurrentUserRank(currentUser.rank);
-    }
+    // Use setTimeout to defer state update
+    setTimeout(() => setEntries(leaderboardEntries), 0);
   }, [currentUserId]);
+
+  // Use useMemo for derived state
+  const currentUserRank = useMemo(() => {
+    const currentUser = entries.find(entry => entry.id === currentUserId);
+    return currentUser?.rank ?? null;
+  }, [entries, currentUserId]);
 
   const getMedalIcon = (rank: number): string => {
     if (rank === 1) return '🥇';

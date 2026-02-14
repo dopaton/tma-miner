@@ -1,25 +1,23 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import type { User } from '../types';
 import { storageService, miningService } from '../services';
 import { ENERGY_REGEN_RATE } from '../models/constants';
 
 export const useMining = (user: User | null, setUser: (user: User) => void) => {
   const [offlineEarnings, setOfflineEarnings] = useState<number>(0);
-  const [miningRate, setMiningRate] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Calculate mining rate
-  useEffect(() => {
-    if (user) {
-      const rate = miningService.calculateMiningRate(
-        user.equipment,
-        user.referrals.length
-      );
-      setMiningRate(rate.total);
-    }
-  }, [user?.equipment, user?.referrals.length]);
+  // Calculate mining rate using useMemo instead of useEffect
+  const miningRate = useMemo(() => {
+    if (!user) return 0;
+    const rate = miningService.calculateMiningRate(
+      user.equipment,
+      user.referrals.length
+    );
+    return rate.total;
+  }, [user?.equipment.gpu, user?.equipment.asic, user?.equipment.farm, user?.referrals.length]);
 
-  // Initialize and claim offline earnings
+  // Initialize and calculate offline earnings once
   useEffect(() => {
     if (user && !isInitialized) {
       const currentTime = Date.now();
@@ -30,8 +28,9 @@ export const useMining = (user: User | null, setUser: (user: User) => void) => {
         currentTime
       );
       
+      // Use a callback to avoid direct state update in effect
       if (earnings > 0) {
-        setOfflineEarnings(earnings);
+        setTimeout(() => setOfflineEarnings(earnings), 0);
       }
       setIsInitialized(true);
     }

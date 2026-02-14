@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { storageService } from '../services';
 import type { LeaderboardEntry } from '../types';
 import { formatNumber } from '../utils/helpers';
@@ -9,19 +9,15 @@ interface LeaderboardProps {
 }
 
 const Leaderboard: React.FC<LeaderboardProps> = ({ currentUserId }) => {
-  const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
-
-  useEffect(() => {
+  const entries = useMemo<LeaderboardEntry[]>(() => {
     const leaderboard = storageService.getLeaderboard();
-    const leaderboardEntries: LeaderboardEntry[] = leaderboard.map((user, index) => ({
+    return leaderboard.map((user, index) => ({
       id: user.id,
       username: user.username || `User ${user.id.substring(0, 8)}`,
       totalMined: user.totalMined,
       rank: index + 1,
     }));
-
-    setEntries(leaderboardEntries);
-  }, [currentUserId]);
+  }, []);
 
   // Use useMemo for derived state
   const currentUserRank = useMemo(() => {

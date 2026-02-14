@@ -19,20 +19,23 @@ export const useMining = (user: User | null, setUser: (user: User) => void) => {
 
   // Initialize and calculate offline earnings once
   useEffect(() => {
-    if (user && !isInitialized) {
-      const currentTime = Date.now();
-      const earnings = miningService.calculateOfflineEarnings(
-        user.equipment,
-        user.referrals.length,
-        user.lastMiningTime,
-        currentTime
-      );
-      
-      if (earnings > 0) {
-        setOfflineEarnings(earnings);
+    const initOfflineEarnings = () => {
+      if (user && !isInitialized) {
+        const currentTime = Date.now();
+        const earnings = miningService.calculateOfflineEarnings(
+          user.equipment,
+          user.referrals.length,
+          user.lastMiningTime,
+          currentTime
+        );
+        
+        if (earnings > 0) {
+          setOfflineEarnings(earnings);
+        }
+        setIsInitialized(true);
       }
-      setIsInitialized(true);
-    }
+    };
+    initOfflineEarnings();
   }, [user, isInitialized]);
 
   // Auto-mining ticker (updates every second)

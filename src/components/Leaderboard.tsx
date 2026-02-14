@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { storageService } from '../services';
 import type { LeaderboardEntry } from '../types';
 import { formatNumber } from '../utils/helpers';
@@ -20,8 +20,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ currentUserId }) => {
       rank: index + 1,
     }));
 
-    // Use setTimeout to defer state update
-    setTimeout(() => setEntries(leaderboardEntries), 0);
+    setEntries(leaderboardEntries);
   }, [currentUserId]);
 
   // Use useMemo for derived state

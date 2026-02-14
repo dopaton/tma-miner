@@ -15,7 +15,7 @@ export const useMining = (user: User | null, setUser: (user: User) => void) => {
       user.referrals.length
     );
     return rate.total;
-  }, [user?.equipment.gpu, user?.equipment.asic, user?.equipment.farm, user?.referrals.length]);
+  }, [user]);
 
   // Initialize and calculate offline earnings once
   useEffect(() => {
@@ -28,9 +28,8 @@ export const useMining = (user: User | null, setUser: (user: User) => void) => {
         currentTime
       );
       
-      // Use a callback to avoid direct state update in effect
       if (earnings > 0) {
-        setTimeout(() => setOfflineEarnings(earnings), 0);
+        setOfflineEarnings(earnings);
       }
       setIsInitialized(true);
     }

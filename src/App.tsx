@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import type { User, Equipment } from './types';
-import './types/telegram.d.ts';
 import { storageService } from './services';
 import { useMining, useEquipment, useEnergy } from './hooks';
 import MiningFarm from './components/MiningFarm';
